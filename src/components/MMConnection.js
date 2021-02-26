@@ -2,7 +2,7 @@ import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Image } from 'semantic-ui-react'
 import mmImg from "../img/metamask.png";
-import { Button, Modal } from 'semantic-ui-react'
+import { Button, Modal, Divider } from 'semantic-ui-react'
 import { Icon } from 'semantic-ui-react'
 import Web3 from "web3"
 import Eth from "web3-eth"
@@ -82,8 +82,10 @@ class Poetry extends React.Component {
     render(){
         return(
             <div>
+                <Divider hidden />
                 {/* image from "https://cdn.iconscout.com/icon/free/png-512/metamask-2728406-2261817.png" */}
                 <Image src={mmImg} size='mini' circular />
+                <Divider hidden />
                 {
                     (this.state.showAcctDetail) &&
                     (<div className="act-detail">
