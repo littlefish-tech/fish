@@ -6,6 +6,33 @@
   height: 40vmin;
   pointer-events: none;
 }
+.swap-tag {
+  font-size: 20px;
+  font-weight: 800;
+  margin-left: 15px;
+}
+.accoutNum {
+  border-style: solid;
+  border-color: green;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+.chainID {
+  font-size: 18px;
+}
+.act-detail {
+  margin-top: 20px;
+}
+.swap-text {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+.invest-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -6,6 +6,9 @@ import EventList from "./EventList"
 import Weather from "./Weather"
 import WorldClock from "./WorldClock"
 import Poetry from "./Poetry"
+import MMConnection from "./MMConnection"
+import Otoken from "./Otoken"
+import Invest from './Invest'
 
 import {gS} from '../gSession'
 
@@ -379,38 +382,55 @@ const allComponents = { // map from component name to component
     'Weather' : Weather,
 	'WorldClock' : WorldClock,
 	'Poetry' : Poetry,
-    'NoComponent' : NoComponent
+    'NoComponent' : NoComponent,
+	'MMConnection' : MMConnection,
+	'Otoken': Otoken,
+	'Invest' : Invest
 
 }
 
 // user chooses component
 const compsDropdown = [
-    {
+    // {
 	
-	text : 	    'EventList',
-	key : 	    'EventList',
-	value: 	    'EventList',
-    },
+	// text : 	    'EventList',
+	// key : 	    'EventList',
+	// value: 	    'EventList',
+    // },
     {
 	text : 	    'Weather',
 	key : 	    'Weather',
 	value :	    'Weather',
     },
-    {
-	text : 	    'EventInput',
-	key : 	    'EventInput',
-       value : 	    'EventInput',
-    },
+    // {
+	// text : 	    'EventInput',
+	// key : 	    'EventInput',
+    //    value : 	    'EventInput',
+    // },
     {
 	text : 	    'Poetry',
 	key : 	    'Poetry',
 	value :     'Poetry',
     },
-    {
-	text : 	    'World Clock',
-	key : 	    'WorldClock',
-	value :     'WorldClock',
-    },
+    // {
+	// text : 	    'World Clock',
+	// key : 	    'WorldClock',
+	// value :     'WorldClock',
+    // },
+	{
+		text: 'MetaMask',
+		key : 'MMConnection',
+		value : 'MMConnection'
+	},
+	{text:"Swap",
+	key: 'Otoken',
+	value: 'Otoken'
+
+	},{
+		text:'Invest',
+		key:'Invest',
+		value:'Invest'
+	}
     ]
 
 

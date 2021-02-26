@@ -10,7 +10,10 @@ import { gS } from "./gSession.js"
 
 class App extends React.Component {
     state = {
-	curUser  : null,
+	curUser  : {
+		id:0,
+		name:"god"
+	},
 	appState : {},
     }
 

@@ -26,9 +26,9 @@ class WeatherDisplay extends React.Component{
 	let wIILen =  weatherIconId.length
 	let lastChar = W.weather[0].icon.charAt(wIILen - 1);
 	let weatherCond = W.weather[0].id
-	let dayNight = lastChar == 'n' ? "night-": "day-"
+	let dayNight = lastChar === 'n' ? "night-": "day-"
 
-	let dayLight = dayNight == 'day-'
+	let dayLight = dayNight === 'day-'
 	
 	let iconName = "wi wi-owm-"+dayNight+weatherCond
 	
@@ -97,7 +97,7 @@ class WeatherDisplay extends React.Component{
  
 		<div>
 		<Container textAlign='right'>
-		<Radio slider checked={this.state.displayC == false} onClick={this.switchTemp.bind(this)}/>
+		<Radio slider checked={this.state.displayC === false} onClick={this.switchTemp.bind(this)}/>
 		</Container>
 		{this.props.containerWidth}
 
@@ -187,7 +187,7 @@ class Weather  extends React.Component{
     }
 
     inputValid(e){
-	if (this.state.zipcode == ""){
+	if (this.state.zipcode === ""){
 	    this.setState({zipCodeError: true})
 	}
     }
