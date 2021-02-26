@@ -190,7 +190,7 @@ class Invest extends React.Component {
                  />
                  <Divider hidden/>
                  <p>Or enter the Pair Address: <Input fluid placeholder='Search...' type="text" value={this.state.pairAddress} onChange={this.handleChangeEnterAdd.bind(this)}/></p>
-                 <Button onClick={this.onHandleClick.bind(this)} fluid color="pink">Next</Button>
+                 <Button onClick={this.onHandleClick.bind(this)} fluid color="google plus">Next</Button>
                  <Message hidden={this.state.hideMessage} negative onDismiss={e=>this.setState({hideMessage:true})}>
     Please Enter a valid contract address
   </Message>
@@ -202,8 +202,8 @@ class Invest extends React.Component {
                    <p> <Input placeholder='0.00' value={this.state.firstInvestVal} onChange={this.handleChangeSwapVal.bind(this)}/> <span className="swap-tag">{this.state.firstInvest}</span></p>
                    <Icon name="plus" color="red" flipped/>
           <p><Input disabled placeholder='0.00' value={this.state.secondInvestVal}/> <span className="swap-tag">{this.state.secondInvest}</span></p>
-          <Button  color="blue" onClick={e=>this.setState({showInvest:false})}>Cancel</Button>
-          <Button  color="pink" onClick={this.onClickInvest.bind(this)}>Invest</Button>
+          <Button  color="black" onClick={e=>this.setState({showInvest:false})}>Cancel</Button>
+          <Button  color="purple" onClick={this.onClickInvest.bind(this)}>Invest</Button>
           <Message hidden={this.state.hasMM} negative onDismiss={e=>this.setState({hasMM:true})}>
     Please install Meta Mask Extension First
   </Message>
