@@ -118,10 +118,12 @@ class Invest extends React.Component {
            const chainId = await window.ethereum.request({method: 'eth_chainId'})
            const ethBal = await window.ethereum.request({method: 'eth_getBalance', 
                                                          params: [account, 'latest']})
-            if(this.state.firstInvestVal === "" || typeof(parseFloat(this.state.firstInvestVal)) !== "number" || parseFloat(this.state.firstInvestVal) === 0){
+            if(this.state.firstInvestVal === "" || !parseFloat(this.state.firstInvestVal) || parseFloat(this.state.firstInvestVal) === 0){
                 this.setState({inputError: true})
                 this.setState({notshowInvestMsg:true})
                 }else {
+                    this.setState({inputError: false})
+                this.setState({notshowInvestMsg:false})
                     if(this.state.firstInvest !== "ETH"){
                         if(parseInt(this.state.secondInvestVal) > (this.state.ethBal/2000000000000000000)){
                             // await this.setState({notshowInvestMsg:true})

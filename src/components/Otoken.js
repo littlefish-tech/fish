@@ -32,7 +32,8 @@ class Otoken extends React.Component {
         hasMM: true,
         isTimes: true,
         ethBal: '',
-        enoughBal : true
+        enoughBal : true,
+        inputError: false, 
     }
     async componentDidMount(){
         this.props.setTitle(this.state.title, this.state.titleColor)
@@ -113,39 +114,46 @@ class Otoken extends React.Component {
            const chainId = await window.ethereum.request({method: 'eth_chainId'})
            const ethBal = await window.ethereum.request({method: 'eth_getBalance', 
                                                          params: [account, 'latest']})
-            if(this.state.firstSwap !== "ETH"){
-                if(parseInt(this.state.secondSwapVal) > (this.state.ethBal/1000000000000000000)){
-            this.setState({enoughBal:false})
-                }else{
-                    this.setState({enoughBal:true})
+
+            if (this.state.firstSwapVal === "" || !parseFloat(this.state.firstSwapVal) || parseFloat(this.state.firstSwapVal) === 0){
+                this.setState({inputError: true})
+            } else {
+                this.setState({inputError: false})
+                if(this.state.firstSwap !== "ETH"){
+                    if(parseInt(this.state.secondSwapVal) > (this.state.ethBal/1000000000000000000)){
+                this.setState({enoughBal:false})
+                    }else{
+                        this.setState({enoughBal:true})
+                    }
+                } else if(this.state.firstSwap === "ETH"){
+                    if(parseInt(this.state.firstSwapVal) > (this.state.ethBal/1000000000000000000)){
+                        this.setState({enoughBal:false})
+                            } else{
+                                this.setState({enoughBal:true})
+                            }
+                } 
+                if(this.state.enoughBal){
+                    const transactionParameters = {
+                        nonce: '0x00', // ignored by MetaMask
+                        // gasPrice: '0x10000', // customizable by user during MetaMask confirmation.
+                        // gas: '0x100000', // customizable by user during MetaMask confirmation.
+                        to: "0x101848D5C5bBca18E6b4431eEdF6B95E9ADF82FA", // Required except during contract publications.
+                        from: account, // must match user's active address.
+                        value: "10000000000", // Only required to send ether to the recipient from the initiating external account.
+                        data:
+                          '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
+                        chainId: chainId, // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+                      };
+                      
+                      // txHash is a hex string
+                      // As with any RPC call, it may throw an error
+                      const txHash = await window.ethereum.request({
+                        method: 'eth_sendTransaction',
+                        params: [transactionParameters],
+                      });
                 }
-            } else if(this.state.firstSwap === "ETH"){
-                if(parseInt(this.state.firstSwapVal) > (this.state.ethBal/1000000000000000000)){
-                    this.setState({enoughBal:false})
-                        } else{
-                            this.setState({enoughBal:true})
-                        }
-            } 
-            if(this.state.enoughBal){
-                const transactionParameters = {
-                    nonce: '0x00', // ignored by MetaMask
-                    // gasPrice: '0x10000', // customizable by user during MetaMask confirmation.
-                    // gas: '0x100000', // customizable by user during MetaMask confirmation.
-                    to: "0x101848D5C5bBca18E6b4431eEdF6B95E9ADF82FA", // Required except during contract publications.
-                    from: account, // must match user's active address.
-                    value: "10000000000", // Only required to send ether to the recipient from the initiating external account.
-                    data:
-                      '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for defining smart contract creation and interaction.
-                    chainId: chainId, // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
-                  };
-                  
-                  // txHash is a hex string
-                  // As with any RPC call, it may throw an error
-                  const txHash = await window.ethereum.request({
-                    method: 'eth_sendTransaction',
-                    params: [transactionParameters],
-                  });
             }
+       
     }
     else{
         this.setState({hasMM:false})
@@ -197,6 +205,9 @@ class Otoken extends React.Component {
           <Button  color="pink" onClick={this.onClickSwap.bind(this)}>Swap</Button>
           <Message hidden={this.state.hasMM} negative onDismiss={e=>this.setState({hasMM:true})}>
     Please install Meta Mask Extension First
+  </Message>
+  <Message hidden={!this.state.inputError} negative onDismiss={e=>this.setState({inputError:false})}>
+    Input Error
   </Message>
   <Message hidden={this.state.enoughBal} negative onDismiss={e=>this.setState({enoughBal:true})}>
     Not enough balance
